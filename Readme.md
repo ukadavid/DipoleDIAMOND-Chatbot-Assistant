@@ -45,6 +45,30 @@ npm install
 npm run watch
 ```
 
+## Contribution
+
+1. Pull from the main branch so your code will be up to date to prevent conflicts
+
+```bash
+git pull origin main
+```
+
+2. Create a branch with your name
+   
+```bash
+git checkout -b <your name>
+```
+3. Merge with main repo on subsiquent changes made
+
+```bash
+git merge main
+```
+
+4. Push to your branch
+
+```bash
+git push --set-upstream origin <your name>
+```
 ## Project Process Flow
 
 Here is a link to the bot process flow: [Chatbot Process Flow](/Processflow.md)
