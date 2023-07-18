@@ -39,3 +39,11 @@
 17. Bot handles each selected action and responds accordingly.
 
 18. The conversation ends when the contact centre agent finishes using the bot or explicitly ends the conversation.
+
+19. Bot displays a farewell message: "Thank you for using dipoleDIAMOND CC Assistant. Goodbye."
+
+20. Bot ends the conversation.
+
+21. Bot is closed.
+
+22. Bot is relaunched and the process repeats from step 1.
