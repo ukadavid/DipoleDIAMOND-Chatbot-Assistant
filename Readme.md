@@ -75,7 +75,5 @@ Here is a link to the bot process flow: [Chatbot Process Flow](/Processflow.md)
 
 ## Project Update
 Pending tasks are listed below:
-- lien
 - outward
 - inward
-- charge reversal

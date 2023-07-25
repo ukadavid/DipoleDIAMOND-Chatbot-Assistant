@@ -60,9 +60,9 @@ async function performBalanceEnquiryApiCall(apiUrl, requestData) {
 }
 async function performLienEnquiryApiCall(apiUrl, requestData) {
     try {
-        // const RequestId = '112131212';
+        const RequestId = '112131212';
         const { AccountNumber } = requestData;
-        const RequestId = generateRandomRequestId();
+        // const RequestId = generateRandomRequestId();
         // Make the API call using Axios
         const response = await axios.post(apiUrl, { RequestId, AccountNumber });
 
@@ -70,7 +70,7 @@ async function performLienEnquiryApiCall(apiUrl, requestData) {
         console.log('API response:', response.data);
 
         // You can return the response data if needed
-        return response.data.bvn;
+        return response.data;
     } catch (error) {
         // Handle API call errors here
         console.error('API call error:', error.data);
@@ -222,12 +222,13 @@ async function performChargeReversalEnquiryApiCall(apiUrl, requestData) {
     try {
         const RequestId = '112131212';
         const { AccountNumber, Amount } = requestData;
-        let { StartDate, EndDate, } = requestData;
+        let { StartDate, EndDate } = requestData;
         StartDate = StartDate[0].timex;
         EndDate = EndDate[0].timex;
         // const RequestId = generateRandomRequestId();
         // Make the API call using Axios
-        const response = await axios.post(apiUrl, { RequestId, AccountNumber, StartDate, Amount, EndDate });
+        const response = await axios.post(apiUrl,
+            { RequestId, AccountNumber, StartDate, Amount, EndDate });
 
         // Handle the API response here
         console.log('API response:', response.data);
