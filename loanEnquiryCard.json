@@ -1,0 +1,64 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.3",
+    "body": [
+      {
+        "type": "TextBlock",
+        "text": "Loan Enquiry Successful!",
+        "size": "medium",
+        "weight": "bolder"
+      },
+      {
+        "type": "TextBlock",
+        "text": "Loan Eligibility Details:",
+        "size": "medium",
+        "wrap": true
+      },
+      {
+        "type": "FactSet",
+        "facts": [
+          {
+            "title": "Amount",
+            "value": "${amount}"
+          },
+          {
+            "title": "Last Salary Date",
+            "value": "${lastSalaryDate}"
+          },
+          {
+            "title": "Average Salary Per Year",
+            "value": "${avgSalaryPerYear}"
+          },
+          {
+            "title": "Last Salary Amount",
+            "value": "${lastSalaryAmount}"
+          },
+          {
+            "title": "Currency",
+            "value": "${currency}"
+          },
+          {
+            "title": "Status",
+            "value": "${status}"
+          }
+        ]
+      },
+      {
+        "type": "TextBlock",
+        "text": "Request ID: ${requestId}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Response Code: ${responseCode}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Response Message: ${responseMessage}",
+        "wrap": true
+      }
+    ]
+  }
+  
