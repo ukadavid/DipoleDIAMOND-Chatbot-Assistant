@@ -239,9 +239,9 @@ async function performChargeReversalEnquiryApiCall(apiUrl, requestData) {
 }
 async function performLoanEnquiryApiCall(apiUrl, requestData) {
     try {
-        // const RequestId = '112131212';
+        const RequestId = '112131212';
         const { PhoneNumber } = requestData;
-        const RequestId = generateRandomRequestId();
+        // const RequestId = generateRandomRequestId();
         // Make the API call using Axios
         const response = await axios.post(apiUrl, { RequestId, PhoneNumber });
 
@@ -252,7 +252,7 @@ async function performLoanEnquiryApiCall(apiUrl, requestData) {
         return response.data;
     } catch (error) {
         // Handle API call errors here
-        console.error('API call error:', error.data);
+        console.error('API call error:', error);
         return error;
     }
 }
