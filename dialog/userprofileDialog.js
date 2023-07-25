@@ -21,7 +21,8 @@ class UserProfileDialog extends ComponentDialog {
             this.authenticationStep.bind(this),
             this.authenticationValidationStep.bind(this),
             this.menuStep.bind(this),
-            this.processActionStep.bind(this)
+            this.processActionStep.bind(this),
+            this.showMenuStep.bind(this)
         ]);
         this.addDialog(new ActionDialog('actionDialog'));
         this.addDialog(new TextPrompt(TEXT_PROMPT))
@@ -161,6 +162,11 @@ class UserProfileDialog extends ComponentDialog {
 
         // Start the ActionDialog to handle the API calls based on the selected option
         return await stepContext.beginDialog('actionDialog', { selectedOption });
+    }
+
+    async showMenuStep(stepContext) {
+        // After the action is completed, show the menu again
+        return await stepContext.replaceDialog(WATERFALL_DIALOG, stepContext.options);
     }
 }
 
