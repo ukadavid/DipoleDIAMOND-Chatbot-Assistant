@@ -1,0 +1,92 @@
+{
+    "type": "AdaptiveCard",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.3",
+    "body": [
+        {
+            "type": "TextBlock",
+            "size": "medium",
+            "weight": "bolder",
+            "text": "Main Menu",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "weight": "bolder",
+            "text": "Welcome to dipoleDIAMOND CC Assistant, what can I do for you today?",
+            "wrap": true
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.Submit",
+            "title": "BVN Enquiry",
+            "data": { "title": "BVN Enquiry" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Balance Enquiry",
+            "data": { "title": "Balance Enquiry" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Account Status Enquiry",
+            "data": { "title": "Check Account BVN" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Lien Enquiry",
+            "data": { "title": "Lien Enquiry" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Mobile Enquiry",
+            "data": { "title": "Mobile Enquiry" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Transaction Enquiry",
+            "data": { "title": "Transaction Enquiry" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Account Details Enquiry",
+            "data": { "title": "Account Details Enquiry" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Customer Enquiry",
+            "data": { "title": "Customer Enquiry" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Loan Enquiry",
+            "data": { "title": "Loan Enquiry" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Statement Enquiry",
+            "data": { "title": "Statement Enquiry" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Charge Reversal Enquiry",
+            "data": { "title": "Charge Reversal Enquiry" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Outward Transfer Status",
+            "data": { "title": "Outward Transfer Status" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Inward Transfer Status",
+            "data": { "title": "Inward Transfer Status" } 
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Validate Token",
+            "data": { "title": "Validate Token" } 
+        }
+    ]
+}

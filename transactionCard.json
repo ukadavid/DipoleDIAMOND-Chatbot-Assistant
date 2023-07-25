@@ -1,0 +1,90 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.3",
+    "body": [
+      {
+        "type": "TextBlock",
+        "text": "Transaction Status Enquiry successful!",
+        "size": "medium",
+        "weight": "bolder"
+      },
+      {
+        "type": "TextBlock",
+        "text": "Here is the table:",
+        "size": "medium",
+        "wrap": true
+      },
+      {
+        "type": "ColumnSet",
+        "columns": [
+          {
+            "type": "Column",
+            "items": [
+              {
+                "type": "TextBlock",
+                "text": "finacleTranId",
+                "weight": "bolder"
+              }
+            ]
+          },
+          {
+            "type": "Column",
+            "items": [
+              {
+                "type": "TextBlock",
+                "text": "transactionReference",
+                "weight": "bolder"
+              }
+            ]
+          },
+          {
+            "type": "Column",
+            "items": [
+              {
+                "type": "TextBlock",
+                "text": "transactionStatus",
+                "weight": "bolder"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ColumnSet",
+        "columns": [
+          {
+            "type": "Column",
+            "items": [
+              {
+                "type": "TextBlock",
+                "text": "${finacleTranId}",
+                "wrap": true
+              }
+            ]
+          },
+          {
+            "type": "Column",
+            "items": [
+              {
+                "type": "TextBlock",
+                "text": "${transactionReference}",
+                "wrap": true
+              }
+            ]
+          },
+          {
+            "type": "Column",
+            "items": [
+              {
+                "type": "TextBlock",
+                "text": "${transactionStatus}",
+                "wrap": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  

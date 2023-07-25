@@ -72,3 +72,12 @@ git push --set-upstream origin <your name>
 ## Project Process Flow
 
 Here is a link to the bot process flow: [Chatbot Process Flow](/Processflow.md)
+
+## Project Update
+Pending tasks are listed below:
+-lien
+-outward
+-inward
+-charge reversal
+-get customer details
+-fetch eligibility
