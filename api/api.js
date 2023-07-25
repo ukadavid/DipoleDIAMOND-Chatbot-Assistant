@@ -220,9 +220,12 @@ async function performOutwardTransferApiCall(apiUrl, requestData) {
 }
 async function performChargeReversalEnquiryApiCall(apiUrl, requestData) {
     try {
-        // const RequestId = '112131212';
-        const { AccountNumber, StartDate, EndDate, Amount } = requestData;
-        const RequestId = generateRandomRequestId();
+        const RequestId = '112131212';
+        const { AccountNumber, Amount } = requestData;
+        let { StartDate, EndDate, } = requestData;
+        StartDate = StartDate[0].timex;
+        EndDate = EndDate[0].timex;
+        // const RequestId = generateRandomRequestId();
         // Make the API call using Axios
         const response = await axios.post(apiUrl, { RequestId, AccountNumber, StartDate, Amount, EndDate });
 
@@ -230,10 +233,10 @@ async function performChargeReversalEnquiryApiCall(apiUrl, requestData) {
         console.log('API response:', response.data);
 
         // You can return the response data if needed
-        return response.data.bvn;
+        return response.data;
     } catch (error) {
         // Handle API call errors here
-        console.error('API call error:', error.data);
+        console.error('API call error:', error);
         return error;
     }
 }
