@@ -85,7 +85,7 @@ class ActionDialog extends ComponentDialog {
         case 'Outward Transfer Status':
             return await stepContext.beginDialog('outwardTransferDialog');
         case 'Charge Reversal Enquiry':
-            return await stepContext.beginDialog('chargeReversalDialog');
+            return await stepContext.beginDialog('chargeReversalEnquiryDialog');
         case 'Validate Token':
             return await stepContext.beginDialog('validateTokenDialog');
         }
