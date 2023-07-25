@@ -1,0 +1,158 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.3",
+    "body": [
+      {
+        "type": "TextBlock",
+        "text": "Account Details Enquiry successful!",
+        "size": "medium",
+        "weight": "bolder"
+      },
+      {
+        "type": "TextBlock",
+        "text": "Here are the account details:",
+        "size": "medium",
+        "wrap": true
+      },
+      {
+        "type": "ColumnSet",
+        "columns": [
+          {
+            "type": "Column",
+            "items": [
+              {
+                "type": "TextBlock",
+                "weight": "bolder"
+              }
+            ]
+          },
+          {
+            "type": "Column",
+            "items": [
+              {
+                "type": "TextBlock",
+                "weight": "bolder"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ColumnSet",
+        "columns": [
+          {
+            "type": "Column",
+            "items": [
+              {
+                "type": "TextBlock",
+                "text": "Customer ID",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "Account Number",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "Account Name",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "Account Type",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "Product Code",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "Product",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "Account Status",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "Currency Code",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "Branch Code",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "Branch",
+                "wrap": true
+              }
+            ]
+          },
+          {
+            "type": "Column",
+            "items": [
+              {
+                "type": "TextBlock",
+                "text": "${customerId}",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "${accountNumber}",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "${accountName}",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "${accountType}",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "${productCode}",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "${product}",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "${accountStatus}",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "${currencyCode}",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "${branchCode}",
+                "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "${branch}",
+                "wrap": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  
