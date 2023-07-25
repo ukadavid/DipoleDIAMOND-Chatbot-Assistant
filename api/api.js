@@ -157,9 +157,9 @@ async function performStatementEnquiryApiCall(apiUrl, requestData) {
 }
 async function performCustomerEnquiryApiCall(apiUrl, requestData) {
     try {
-        // const RequestId = '112131212';
+        const RequestId = '112131212';
         const { CustomerId } = requestData;
-        const RequestId = generateRandomRequestId();
+        // const RequestId = generateRandomRequestId();
         // Make the API call using Axios
         const response = await axios.post(apiUrl, { RequestId, CustomerId });
 
@@ -167,10 +167,10 @@ async function performCustomerEnquiryApiCall(apiUrl, requestData) {
         console.log('API response:', response.data);
 
         // You can return the response data if needed
-        return response.data.bvn;
+        return response.data;
     } catch (error) {
         // Handle API call errors here
-        console.error('API call error:', error.data);
+        console.error('API call error:', error);
         return error;
     }
 }

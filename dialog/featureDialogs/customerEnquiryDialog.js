@@ -1,10 +1,18 @@
+const fs = require('fs');
+const path = require('path');
 const { TextPrompt, WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
+const { CardFactory } = require('botbuilder');
 const API_BASE_URL = 'https://dac-fn7h.onrender.com';
 const { performCustomerEnquiryApiCall } = require('../../api/api.js');
 
 const TEXT_PROMPT = 'textPrompt';
 const CUSTOMER_ENQUIRY_DIALOG = 'customerEnquiryDialog';
 
+function formatIsoDate(isoDate) {
+    const dateObj = new Date(isoDate);
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return dateObj.toLocaleDateString(undefined, options);
+}
 class CustomerEnquiryDialog extends ComponentDialog {
     constructor(dialogID) {
         super(dialogID || CUSTOMER_ENQUIRY_DIALOG);
@@ -30,13 +38,40 @@ class CustomerEnquiryDialog extends ComponentDialog {
         const requestData = { CustomerId: CustomerId };
         const response = await performCustomerEnquiryApiCall(apiUrl, requestData);
 
-        if (response === 'Internal Server Error') {
+        if (response.responseMessage === 'Successful') {
+            // Handle API success response
+            // Load the adaptive card template from the JSON file
+            const cardJsonPath = path.join(__dirname, '../../customerDetailsCard.json');
+            const adaptiveCardTemplate = JSON.parse(fs.readFileSync(cardJsonPath, 'utf8'));
+
+            // Replace placeholders in the template with data from the response
+            const placeholders = {
+                customerId: response.customerId,
+                title: response.title,
+                gender: response.gender,
+                firstName: response.firstName,
+                middleName: response.middleName,
+                lastName: response.lastName,
+                customerCategory: response.customerCategory,
+                address: response.address,
+                dateOfBirth: formatIsoDate(response.dateOfBirth),
+                mobileNo: response.mobileNo,
+                email: response.email,
+                state: response.state,
+                country: response.country
+            };
+
+            const processedCardJson = JSON.stringify(adaptiveCardTemplate).replace(
+                /\${([^{}]+)}/g,
+                (match, capture) => placeholders[capture.trim()]
+            );
+
+            const adaptiveCard = JSON.parse(processedCardJson);
+
+            await stepContext.context.sendActivity({ attachments: [CardFactory.adaptiveCard(adaptiveCard)] });
+        } else {
             // Handle API error response
             await stepContext.context.sendActivity('Sorry, we encountered an error while processing your request. Please try again later.');
-        } else {
-            // Handle API success response
-            // 'response' here will be the status text received from the API response
-            await stepContext.context.sendActivity(`BVN Enquiry successful! Your BVN is: ${ response }`);
         }
 
         // End the dialog and return to the main menu prompt

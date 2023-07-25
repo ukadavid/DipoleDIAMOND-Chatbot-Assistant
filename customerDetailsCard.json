@@ -1,0 +1,59 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+      {
+        "type": "TextBlock",
+        "text": "Customer Details",
+        "weight": "Bolder",
+        "size": "Medium"
+      },
+      {
+        "type": "TextBlock",
+        "text": "Name: ${firstName} ${middleName} ${lastName}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Title: ${title}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Gender: ${gender}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Date of Birth: ${dateOfBirth}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Address: ${address}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Mobile No: ${mobileNo}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Email: ${email}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "State: ${state}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Country: ${country}",
+        "wrap": true
+      }
+    ]
+  }
+  

@@ -79,4 +79,3 @@ Pending tasks are listed below:
 - outward
 - inward
 - charge reversal
-- get customer details.
