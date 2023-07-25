@@ -30,13 +30,17 @@ class MobileEnquiryDialog extends ComponentDialog {
         const requestData = { MobileNumber: MobileNumber };
         const response = await performMobileEnquiryApiCall(apiUrl, requestData);
 
-        if (response === 'Internal Server Error') {
+        if (response.responseMessage === 'Successful') {
+            // Handle API success response
+            // Loop through the accounts array and render its contents
+            let message = 'Mobile Enquiry successful! \nHere are your accounts:\n';
+            for (const account of response.accounts) {
+                message += `\n Account Name: ${ account }\n`;
+            }
+            await stepContext.context.sendActivity(message);
+        } else {
             // Handle API error response
             await stepContext.context.sendActivity('Sorry, we encountered an error while processing your request. Please try again later.');
-        } else {
-            // Handle API success response
-            // 'response' here will be the status text received from the API response
-            await stepContext.context.sendActivity(`BVN Enquiry successful! Your Lien Enquiry is: ${ response }`);
         }
 
         // End the dialog and return to the main menu prompt

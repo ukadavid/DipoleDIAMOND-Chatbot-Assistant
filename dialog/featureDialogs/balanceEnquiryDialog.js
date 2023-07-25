@@ -29,13 +29,16 @@ class BalanceEnquiryDialog extends ComponentDialog {
         const apiUrl = `${ API_BASE_URL }/api/bank/dac/balance`;
         const requestData = { AccountNumber: accountNumber };
         const response = await performBalanceEnquiryApiCall(apiUrl, requestData);
-
+        console.log(response);
         if (response.responseMessage === 'Successful') {
-            // Handle API error response
-            await stepContext.context.sendActivity(`Balance Enquiry successful! Your Balance is: ${ response }`);
-        } else {
             // Handle API success response
-            // 'response' here will be the status text received from the API response
+            // Corrected message with newline characters
+            await stepContext.context.sendActivity(`Balance Enquiry successful! 
+\n Your Account Name is: ${ response.accountName }
+\n Your Account Number is: ${ response.accountNumber }
+\n Your Available Balance is: ₦${ response.availableBalance }`);
+        } else {
+            // Handle API error response
             await stepContext.context.sendActivity('Sorry, we encountered an error while processing your request. Please try again later.');
         }
 

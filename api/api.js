@@ -1,8 +1,5 @@
 const axios = require('axios');
 const { generateRandomRequestId } = require('../requestID.js');
-// lien
-// outward
-//
 
 async function performBVNEnquiryApiCall(apiUrl, requestData) {
     try {
@@ -44,9 +41,9 @@ async function performAccountDetailsApiCall(apiUrl, requestData) {
 }
 async function performBalanceEnquiryApiCall(apiUrl, requestData) {
     try {
-        // const RequestId = '112131212';
+        const RequestId = '112131212';
         const { AccountNumber } = requestData;
-        const RequestId = generateRandomRequestId();
+        // const RequestId = generateRandomRequestId();
         // Make the API call using Axios
         const response = await axios.post(apiUrl, { RequestId, AccountNumber });
 
@@ -54,10 +51,10 @@ async function performBalanceEnquiryApiCall(apiUrl, requestData) {
         console.log('API response:', response.data);
 
         // You can return the response data if needed
-        return response.data.bvn;
+        return response.data;
     } catch (error) {
         // Handle API call errors here
-        console.error('API call error:', error.data);
+        console.error('API call error:', error);
         return error;
     }
 }
@@ -101,9 +98,9 @@ async function performAccountStatusApiCall(apiUrl, requestData) {
 }
 async function performMobileEnquiryApiCall(apiUrl, requestData) {
     try {
-        // const RequestId = '112131212';
+        const RequestId = '112131212';
         const { MobileNumber } = requestData;
-        const RequestId = generateRandomRequestId();
+        // const RequestId = generateRandomRequestId();
         // Make the API call using Axios
         const response = await axios.post(apiUrl, { RequestId, MobileNumber });
 
@@ -111,7 +108,7 @@ async function performMobileEnquiryApiCall(apiUrl, requestData) {
         console.log('API response:', response.data);
 
         // You can return the response data if needed
-        return response.data.bvn;
+        return response.data;
     } catch (error) {
         // Handle API call errors here
         console.error('API call error:', error.data);
