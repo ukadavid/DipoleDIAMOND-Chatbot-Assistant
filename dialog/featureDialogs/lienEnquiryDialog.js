@@ -4,6 +4,11 @@ const { performLienEnquiryApiCall } = require('../../api/api.js');
 
 const TEXT_PROMPT = 'textPrompt';
 const LIEN_ENQUIRY_DIALOG = 'lienEnquiryDialog';
+function formatIsoDate(isoDate) {
+    const dateObj = new Date(isoDate);
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return dateObj.toLocaleDateString(undefined, options);
+}
 
 class LienEnquiryDialog extends ComponentDialog {
     constructor(dialogID) {
@@ -34,9 +39,24 @@ class LienEnquiryDialog extends ComponentDialog {
             // Handle API error response
             await stepContext.context.sendActivity('Sorry, we encountered an error while processing your request. Please try again later.');
         } else {
-            // Handle API success response
-            // 'response' here will be the status text received from the API response
-            await stepContext.context.sendActivity(`BVN Enquiry successful! Your Lien Enquiry is: ${ response }`);
+            if (response.liens && response.liens.length > 0) {
+                await stepContext.context.sendActivity('Lien Enquiry Successful');
+                for (const lien of response.liens) {
+                    let liensText = '';
+                    liensText += `Account Number: ${ lien.accountNumber }\n`;
+                    liensText += `\nLien Amount: ₦${ lien.lienAmount }\n`;
+                    liensText += `\nLien Reason: ${ lien.lienReason }\n`;
+                    liensText += `\nInitiator: ${ lien.initiator }\n`;
+                    liensText += `\nVerifier: ${ lien.verifier }\n`;
+                    liensText += `\nBranch Code: ${ lien.branchCode }\n`;
+                    liensText += `\nLien Date: ${ formatIsoDate(lien.lienDate) }\n`;
+                    liensText += `\nExpiry Date: ${ formatIsoDate(lien.expiryDate) }\n\n`;
+
+                    await stepContext.context.sendActivity(liensText);
+                }
+            } else {
+                await stepContext.context.sendActivity('No liens found for the given account number.');
+            }
         }
 
         // End the dialog and return to the main menu prompt
