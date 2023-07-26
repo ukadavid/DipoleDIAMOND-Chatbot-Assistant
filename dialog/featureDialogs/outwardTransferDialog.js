@@ -65,12 +65,11 @@ class OutwardTransferDialog extends ComponentDialog {
             Amount: amount
         };
         const response = await performOutwardTransferApiCall(apiUrl, requestData);
-
-        if (response.transactionDetails !== 0) {
+        if (response.transactionDetails !== null) {
             // Handle API success response
             // 'response' here will be the status text received from the API response
 
-            const transactionsTable = this.renderTransactions(response);
+            const transactionsTable = this.renderTransactions(response.transactionDetails);
             const adaptiveCard = CardFactory.adaptiveCard(transactionsTable);
 
             await stepContext.context.sendActivity({ attachments: [adaptiveCard] });
@@ -84,28 +83,19 @@ class OutwardTransferDialog extends ComponentDialog {
     }
 
     renderTransactions(transactions) {
+        const facts = [];
         const tableRows = transactions.map((transaction) => {
-            return {
-                type: 'ColumnSet',
-                columns: [
-                    { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: `${ transaction.amount }`, wrap: true }] },
-                    { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: `${ transaction.transactionDate }`, wrap: true }] },
-                    { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: `${ transaction.narration }`, wrap: true }] },
-                    { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: `${ transaction.sessionID }`, wrap: true }] },
-                    { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: `${ transaction.status }`, wrap: true }] },
-                    { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: `${ transaction.beneficiaryAccount }`, wrap: true }] },
-                    { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: `${ transaction.beneficiaryName }`, wrap: true }] },
-                    { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: `${ transaction.beneficiaryBankName }`, wrap: true }] },
-                    { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: `${ transaction.beneficiaryBankCode }`, wrap: true }] },
-                    { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: `${ transaction.originatorName }`, wrap: true }] }
-                ]
-            };
+
+            for(let transactionKey in transaction){
+                facts.push({title : transactionKey,
+                             value : transaction[transactionKey]})
+            }
         });
 
         const adaptiveCard = {
             $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
             type: 'AdaptiveCard',
-            version: '1.3',
+            version: '1.0',
             body: [
                 {
                     type: 'TextBlock',
@@ -120,21 +110,15 @@ class OutwardTransferDialog extends ComponentDialog {
                     wrap: true
                 },
                 {
-                    type: 'ColumnSet',
-                    columns: [
-                        { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: 'Amount', weight: 'bolder' }] },
-                        { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: 'Transaction Date', weight: 'bolder' }] },
-                        { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: 'Narration', weight: 'bolder' }] },
-                        { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: 'Session ID', weight: 'bolder' }] },
-                        { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: 'Status', weight: 'bolder' }] },
-                        { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: 'Beneficiary Account', weight: 'bolder' }] },
-                        { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: 'Beneficiary Name', weight: 'bolder' }] },
-                        { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: 'Beneficiary Bank Name', weight: 'bolder' }] },
-                        { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: 'Beneficiary Bank Code', weight: 'bolder' }] },
-                        { type: 'Column', width: 'auto', items: [{ type: 'TextBlock', text: 'Originator Name', weight: 'bolder' }] }
+                    type: 'Container',
+                    items: [
+                        {
+                            type: 'FactSet',
+                            facts: facts
+                        }
                     ]
-                },
-                ...tableRows
+                }
+                // ...tableRows
             ]
         };
 
