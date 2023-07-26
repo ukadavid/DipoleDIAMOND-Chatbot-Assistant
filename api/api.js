@@ -176,11 +176,14 @@ async function performCustomerEnquiryApiCall(apiUrl, requestData) {
 }
 async function performInwardTransferApiCall(apiUrl, requestData) {
     try {
-        // const RequestId = '112131212';
-        const { AccountNumber, TransactionDate, Amount } = requestData;
+        const RequestId = '112131212';
+        const { AccountNumber,  Amount } = requestData;
         const SessionId = '033011121024103436003000889176';
         const FIPTransferType = 1;
-        const RequestId = generateRandomRequestId();
+        //const RequestId = generateRandomRequestId();
+        let { TransactionDate } = requestData;
+        TransactionDate = TransactionDate[0].timex;
+
         // Make the API call using Axios
         const response = await axios.post(apiUrl, { RequestId, AccountNumber, TransactionDate, Amount, SessionId, FIPTransferType });
 
@@ -188,7 +191,7 @@ async function performInwardTransferApiCall(apiUrl, requestData) {
         console.log('API response:', response.data);
 
         // You can return the response data if needed
-        return response.data.bvn;
+        return response.data;
     } catch (error) {
         // Handle API call errors here
         console.error('API call error:', error.data);
@@ -208,10 +211,10 @@ async function performOutwardTransferApiCall(apiUrl, requestData) {
         const response = await axios.post(apiUrl, { RequestId, AccountNumber, TransactionDate, Amount, SessionId, FIPTransferType });
 
         // Handle the API response here
-        console.log('API response:', response.data);
+        // console.log('API response:', response.data);
 
         // You can return the response data if needed
-        return response.data.bvn;
+        return response.data;
     } catch (error) {
         // Handle API call errors here
         console.error('API call error:', error);
