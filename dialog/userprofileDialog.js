@@ -1,5 +1,5 @@
 const { InputHints, MessageFactory, CardFactory } = require('botbuilder');
-const { ConfirmPrompt, ComponentDialog, ChoicePrompt, TextPrompt, WaterfallDialog, ListStyle } = require('botbuilder-dialogs');
+const { ConfirmPrompt, ComponentDialog, ChoicePrompt, TextPrompt, WaterfallDialog, ListStyle, Dialog } = require('botbuilder-dialogs');
 const { validateEmail } = require('../validateEmail');
 const { getMenuCard } = require('../card.js');
 const { ActionDialog } = require('./actionDialog.js');
@@ -144,21 +144,12 @@ class UserProfileDialog extends ComponentDialog {
         // Send the adaptive card to the user
         await stepContext.context.sendActivity(message);
 
-        // Use a ChoicePrompt to wait for the user's response (card selection)
-        return await stepContext.prompt(CHOICE_PROMPT, {
-            prompt: 'Please select an action from the main menu:',
-            retryPrompt: 'Please click on one of the cards or type the name of the action.',
-            choices: menuCard.actions.map((action) => ({
-                value: action.title, // Use the title as the value for the selected option
-                action: action
-            })),
-            style: ListStyle.none // Removes the list-style formatting
-        });
+        return Dialog.EndOfTurn;
     }
 
     async processActionStep(stepContext) {
-        const selectedOption = stepContext.result.value; // Retrieve the title of the selected option in the adaptive card
-        console.log(selectedOption);
+        const activity = stepContext.context.activity;
+        const selectedOption = activity.value?.title || activity.text;
 
         // Start the ActionDialog to handle the API calls based on the selected option
         return await stepContext.beginDialog('actionDialog', { selectedOption });
