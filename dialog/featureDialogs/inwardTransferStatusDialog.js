@@ -1,4 +1,5 @@
 const { TextPrompt, WaterfallDialog, ComponentDialog, DateTimePrompt } = require('botbuilder-dialogs');
+const { CardFactory } = require('botbuilder');
 const API_BASE_URL = 'https://dac-fn7h.onrender.com';
 const { performInwardTransferApiCall } = require('../../api/api.js');
 
@@ -65,17 +66,63 @@ class InwardTransferDialog extends ComponentDialog {
         };
         const response = await performInwardTransferApiCall(apiUrl, requestData);
 
-        if (response === 'Internal Server Error') {
-            // Handle API error response
-            await stepContext.context.sendActivity('Sorry, we encountered an error while processing your request. Please try again later.');
-        } else {
+        if (response.transactionDetails !== null) {
             // Handle API success response
             // 'response' here will be the status text received from the API response
-            await stepContext.context.sendActivity(`Account Status successful! Your Account Status is: ${ response }`);
+
+            const transactionsTable = this.renderTransactions(response.transactionDetails);
+            const adaptiveCard = CardFactory.adaptiveCard(transactionsTable);
+
+            await stepContext.context.sendActivity({ attachments: [adaptiveCard] });
+        } else {
+            // Handle API error response
+            await stepContext.context.sendActivity('Sorry, we encountered an error while processing your request. Please try again later.');
         }
 
         // End the dialog and return to the main menu prompt
         return await stepContext.endDialog();
+    }
+
+    renderTransactions(transactions) {
+        const facts = [];
+        const tableRows = transactions.map((transaction) => {
+
+            for(let transactionKey in transaction){
+                facts.push({title : transactionKey,
+                             value : transaction[transactionKey]})
+            }
+        });
+
+        const adaptiveCard = {
+            $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+            type: 'AdaptiveCard',
+            version: '1.0',
+            body: [
+                {
+                    type: 'TextBlock',
+                    text: 'Transaction Details:',
+                    size: 'medium',
+                    weight: 'bolder'
+                },
+                {
+                    type: 'TextBlock',
+                    text: 'Here is the table:',
+                    size: 'medium',
+                    wrap: true
+                },
+                {
+                    type: 'Container',
+                    items: [
+                        {
+                            type: 'FactSet',
+                            facts: facts
+                        }
+                    ]
+                }
+            ]
+        };
+
+        return adaptiveCard;
     }
 }
 
