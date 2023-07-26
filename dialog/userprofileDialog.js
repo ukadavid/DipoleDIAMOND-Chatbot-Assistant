@@ -49,7 +49,7 @@ class UserProfileDialog extends ComponentDialog {
 
             // validate user inputed a string length not greater than 5
             if (typeof result === 'string' && result.length > 5) {
-                const errorMessageText = 'Username invalid. Please enter a valid username \n \n Username must be a string of characters and length must not be greater than 5';
+                const errorMessageText = 'Username invalid. Please enter a valid username \n \n Username must not be greater than 5 characters';
                 const msg = MessageFactory.text(errorMessageText, errorMessageText, InputHints.ExpectingInput);
                 await stepContext.prompt(TEXT_PROMPT, { prompt: msg });
 
