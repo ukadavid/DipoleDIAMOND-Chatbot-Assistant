@@ -1,0 +1,44 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+      {
+        "type": "TextBlock",
+        "text": "Individual Transaction",
+        "weight": "Bolder",
+        "size": "Medium"
+      },
+      {
+        "type": "TextBlock",
+        "text": "Transaction ID: ${transactionId}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Transaction Date: ${transactionDate}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Amount: ${amount}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Narration: ${narration}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "Value Date: ${valueDate}",
+        "wrap": true
+      },
+      {
+        "type": "TextBlock",
+        "text": "SOL ID: ${solId}",
+        "wrap": true
+      }
+    ]
+  }
+  
