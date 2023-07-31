@@ -21,7 +21,7 @@
         "botbuilder-dialogs": "^4.20.0",
         "dotenv": "~8.2.0",
         "email-validator": "^2.0.4",
-        "restify": "~8.5.1"
+        "restify": "^11.1.0"
     },
     "devDependencies": {
         "eslint": "^7.0.0",

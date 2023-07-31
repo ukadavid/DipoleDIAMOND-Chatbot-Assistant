@@ -1,7 +1,8 @@
 const { TextPrompt, WaterfallDialog, ComponentDialog, DateTimePrompt } = require('botbuilder-dialogs');
 const dotenv = require('dotenv');
-const API_BASE_URL = 'https://dac-fn7h.onrender.com';
 dotenv.config();
+
+const API_BASE_URL = process.env.API_BASE_URL;
 const { performStatementEnquiryApiCall } = require('../../api/api.js');
 
 const TEXT_PROMPT = 'textPrompt';

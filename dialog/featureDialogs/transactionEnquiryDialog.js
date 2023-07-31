@@ -1,6 +1,9 @@
 const { TextPrompt, WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const { CardFactory } = require('botbuilder');
-const API_BASE_URL = 'https://dac-fn7h.onrender.com';
+const dotenv = require('dotenv');
+dotenv.config();
+
+const API_BASE_URL = process.env.API_BASE_URL;
 // Replace the line below with your actual API call function
 const { performTransactionEnquiryApiCall } = require('../../api/api.js');
 const fs = require('fs');
@@ -52,7 +55,7 @@ class TransactionEnquiryDialog extends ComponentDialog {
     }
 
     createAdaptiveCard(data) {
-        const filePath = path.join(__dirname, '../../transactionCard.json');
+        const filePath = path.join(__dirname, '../../jsonRepository/transactionCard.json');
         const adaptiveCardTemplate = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
         // Replace the placeholders in the Adaptive Card JSON with actual data

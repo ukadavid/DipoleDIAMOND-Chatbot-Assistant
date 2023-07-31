@@ -1,5 +1,8 @@
 const { TextPrompt, WaterfallDialog, ComponentDialog, DateTimePrompt } = require('botbuilder-dialogs');
-const API_BASE_URL = 'https://dac-fn7h.onrender.com';
+const dotenv = require('dotenv');
+dotenv.config();
+
+const API_BASE_URL = process.env.API_BASE_URL;
 const { performChargeReversalEnquiryApiCall } = require('../../api/api.js');
 const fs = require('fs');
 const path = require('path');
@@ -87,7 +90,7 @@ class ChargeReversalEnquiryDialog extends ComponentDialog {
         } else {
             // Handle API success response
         // Load the adaptive card template for funds reversal details from the JSON file
-            const fundsReversalCardPath = path.join(__dirname, '../../fundsReversalCard.json');
+            const fundsReversalCardPath = path.join(__dirname, '../../jsonRepository/fundsReversalCard.json');
             const fundsReversalCardTemplate = JSON.parse(fs.readFileSync(fundsReversalCardPath, 'utf8'));
 
             // Replace placeholders in the funds reversal card template with data from the response
@@ -113,7 +116,7 @@ class ChargeReversalEnquiryDialog extends ComponentDialog {
             const fundsReversalAdaptiveCard = JSON.parse(processedFundsReversalJson);
 
             // Load the adaptive card template for individual reversed transactions from the JSON file
-            const individualTransactionCardPath = path.join(__dirname, '../../individualTransactionCard.json');
+            const individualTransactionCardPath = path.join(__dirname, '../../Jsonrepository/individualTransactionCard.json');
             const individualTransactionCardTemplate = JSON.parse(fs.readFileSync(individualTransactionCardPath, 'utf8'));
 
             // Send the overall funds reversal details adaptive card

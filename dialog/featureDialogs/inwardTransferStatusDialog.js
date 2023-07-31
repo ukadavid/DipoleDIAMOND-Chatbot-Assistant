@@ -1,6 +1,9 @@
 const { TextPrompt, WaterfallDialog, ComponentDialog, DateTimePrompt } = require('botbuilder-dialogs');
 const { CardFactory } = require('botbuilder');
-const API_BASE_URL = 'https://dac-fn7h.onrender.com';
+const dotenv = require('dotenv');
+dotenv.config();
+
+const API_BASE_URL = process.env.API_BASE_URL;
 const { performInwardTransferApiCall } = require('../../api/api.js');
 
 const TEXT_PROMPT = 'textPrompt';
@@ -86,10 +89,11 @@ class InwardTransferDialog extends ComponentDialog {
     renderTransactions(transactions) {
         const facts = [];
         const tableRows = transactions.map((transaction) => {
-
-            for(let transactionKey in transaction){
-                facts.push({title : transactionKey,
-                             value : transaction[transactionKey]})
+            for (const transactionKey in transaction) {
+                facts.push({
+                    title: transactionKey,
+                    value: transaction[transactionKey]
+                });
             }
         });
 
