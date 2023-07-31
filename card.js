@@ -1,5 +1,5 @@
 function getMenuCard() {
-    return require('./menu.json');
+    return require('./jsonRepository/menu.json');
 }
 
 module.exports.getMenuCard = getMenuCard;

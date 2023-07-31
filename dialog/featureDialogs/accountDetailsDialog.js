@@ -2,7 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const { TextPrompt, WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const { CardFactory } = require('botbuilder');
-const API_BASE_URL = 'https://dac-fn7h.onrender.com';
+const dotenv = require('dotenv');
+dotenv.config();
+
+const API_BASE_URL = process.env.API_BASE_URL;
 const { performAccountDetailsApiCall } = require('../../api/api.js');
 // error showing here try and fix
 const TEXT_PROMPT = 'textPrompt';
@@ -54,7 +57,7 @@ class AccountDetailsDialog extends ComponentDialog {
     }
 
     createAdaptiveCard(data) {
-        const cardJsonPath = path.join(__dirname, '../../accountDetailsCard.json');
+        const cardJsonPath = path.join(__dirname, '../../jsonRepository/accountDetailsCard.json');
         const adaptiveCardTemplate = JSON.parse(fs.readFileSync(cardJsonPath, 'utf8'));
 
         // Replace placeholders in the template with data
